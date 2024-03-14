@@ -2,25 +2,31 @@
 
 int main(void)
 {
-    int a, b;
+    float a, b;
     float moy;
     do
     {
         printf("Donnez a: ");
-        scanf("%d", &a);
+        scanf("%f", &a);
     } while (a < 0 || a >= 20);
     do
     {
         printf("Donnez  b: ");
-        scanf("%d", &b);
+        scanf("%f", &b);
     } while (b < 0 || b >= 20);
     moy = (a + b) / 2.0;
-    printf("-a: %05d\n-b: %05d \n -moy: %f", a, b, moy);
-    if(moy<10) printf("- Rattrapaage");
-    else if(moy<12) printf("- Passable");
-    else if(moy<14) printf("- Assez Bien");
-    else if(moy<16) printf("- Bien");
-    else printf("- Très bien");
+    printf("-a: %05.2f\n-b: %05.2f \n -moy: %05.2f\n", a, b, moy);
+    if (moy < 10)
+        printf("- Rattrapaage");
+    else if (moy < 12)
+        printf("- Passable");
+    else if (moy < 14)
+        printf("- Assez Bien");
+    else if (moy < 16)
+        printf("- Bien");
+    else
+        printf("- Très bien");
+    printf("\n");
 
     return 0;
 }

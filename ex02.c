@@ -1,27 +1,39 @@
 #include <stdio.h>
-
-int main(int argc, char *argv[])
-{
-    int i;
-    float a, b;
+#include <stdlib.h>
+#include <string.h>
+int main(int argc , char* argv[]){
+    float a , b ;
     char op;
-    if (argc < 4)
+    if (argc != 4)
     {
-        printf("Missing arguments !\n");
+        printf("Error");
         return 1;
     }
-    op = *argv[2];
-    switch (op)
-    {
-    case '+':
-        printf("addition\n");
-    case '-':
-        printf("soustraction\n");
-    default:
-        printf("Autres\n");
+    printf("arguments : %d\n",argc);
+    for (int i = 0 ; i < argc ; i++){
+        printf("%d : %s\n", i, argv[i]);
     }
-    // a=argv[1];
-    // b=argv[3];
-
+    a = atoi(argv[1]);     // la fonction atoi() sert à
+    op = *argv[2];         // convertir une chaîne de caractère (contenant des nombres)
+    b = atoi(argv[3]) ;    // en un float/int 
+    
+    switch(op){
+        case '+': 
+            printf("result is : %.2f",a+b);
+            break;
+        case '-': 
+            printf("result is : %.2f",a-b);
+            break;
+        case 'x': 
+            printf("result is : %.2f",a*b);
+            break;
+        case '/': 
+            
+            printf("result is : %.2f", a/b );
+            break;
+        default:
+            printf("operation invalid");
+            break;
+    }
     return 0;
 }

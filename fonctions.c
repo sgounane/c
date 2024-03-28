@@ -19,3 +19,11 @@ int main()
     printf("La somme est %f \n", s);
     return 0;
 }
+
+// Déclaration de fonction (prototype)
+int addition(int a, int b);
+
+// Définition de fonction
+int addition(int a, int b) {
+    return a + b;
+}

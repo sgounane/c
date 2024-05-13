@@ -49,8 +49,19 @@ void insert_Start(List_E *pl, Student s)
     else
         printf("Liste Plenne...!\n");
 }
-void insert(int k)
+void insert(List_E *pl, Student s, int k)
 {
+    int i;
+    if(pl->lenght<MAX){
+        if(k<=pl->lenght && k>=0){
+            for (i = pl->lenght; i > k; i--)
+                pl->Table[i] = pl->Table[i - 1];
+            pl->Table[k] = s;
+            pl->lenght++;
+        }
+        else printf("Position out bound...!\n");
+    }
+    else printf("Liste Plenne...!\n");
 }
 Student readEtudiant()
 {
@@ -70,11 +81,11 @@ int main()
     List_E l;
     l.lenght = 0;
     e = readEtudiant();
-    insert_Start(&l, e);
+    insert(&l, e, 0);
     e = readEtudiant();
-    insert_Start(&l, e);
+    insert(&l, e, 1);
     e = readEtudiant();
-    insert_Start(&l, e);
+    insert(&l, e, 1);
     printf("In function main \n");
     print_list(l);
     return 0;

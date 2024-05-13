@@ -17,26 +17,40 @@ typedef struct List_E
     int lenght;
 } List_E;
 
-void print_list(List_E l){
+void print_list(List_E l)
+{
     int i;
-    for (i=0;i<l.lenght;i++){
-        printf("%s \t %d \t %f\n",l.Table[i].nom,l.Table[i].age,l.Table[i].moy);
+    for (i = 0; i < l.lenght; i++)
+    {
+        printf("%s \t %d \t %f\n", l.Table[i].nom, l.Table[i].age, l.Table[i].moy);
     }
 }
-void insert_End(List_E *pl, Student s){
-    if(pl->lenght<MAX){
-        pl->Table[pl->lenght]=s;
+void insert_End(List_E *pl, Student s)
+{
+    if (pl->lenght < MAX)
+    {
+        pl->Table[pl->lenght] = s;
         pl->lenght++;
     }
-    else printf("La liste est plenne ...!");
-    printf("In function insert_End\n");
-    print_list(*pl);
+    else
+        printf("La liste est plenne ...!");
 }
-void insert_Start(){
-
+void insert_Start(List_E *pl, Student s)
+{
+    int i;
+    if (pl->lenght < MAX)
+    {
+        if (pl->lenght > 0)
+            for (i = pl->lenght; i > 0; i--)
+                pl->Table[i] = pl->Table[i - 1];
+        pl->Table[0] = s;
+        pl->lenght++;
+    }
+    else
+        printf("Liste Plenne...!\n");
 }
-void insert(int k){
-
+void insert(int k)
+{
 }
 Student readEtudiant()
 {
@@ -52,13 +66,15 @@ Student readEtudiant()
 
 int main()
 {
-    Student e1,e2;
+    Student e;
     List_E l;
-    l.lenght=0;
-    e1 = readEtudiant();
-    e2 = readEtudiant();
-    insert_End(&l,e1);
-    insert_End(&l,e2);
+    l.lenght = 0;
+    e = readEtudiant();
+    insert_Start(&l, e);
+    e = readEtudiant();
+    insert_Start(&l, e);
+    e = readEtudiant();
+    insert_Start(&l, e);
     printf("In function main \n");
     print_list(l);
     return 0;

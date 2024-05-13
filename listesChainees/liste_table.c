@@ -52,17 +52,55 @@ void insert_Start(List_E *pl, Student s)
 void insert(List_E *pl, Student s, int k)
 {
     int i;
-    if(pl->lenght<MAX){
-        if(k<=pl->lenght && k>=0){
+    if (pl->lenght < MAX)
+    {
+        if (k <= pl->lenght && k >= 0)
+        {
             for (i = pl->lenght; i > k; i--)
                 pl->Table[i] = pl->Table[i - 1];
             pl->Table[k] = s;
             pl->lenght++;
         }
-        else printf("Position out bound...!\n");
+        else
+            printf("Position out bound...!\n");
     }
-    else printf("Liste Plenne...!\n");
+    else
+        printf("Liste Plenne...!\n");
 }
+void delete_End(List_E *pl)
+{
+    if (pl->lenght > 0)
+        pl->lenght--;
+    else
+        printf("Empty List ....!\n");
+}
+
+void delete_Start(List_E *pl)
+{
+    int i;
+    if (pl->lenght > 0)
+    {
+        for (i = 0; i < pl->lenght - 1; i++)
+            pl->Table[i] = pl->Table[i + 1];
+        pl->lenght--;
+    }
+    else
+        printf("Empty List ....!\n");
+}
+
+void delete(List_E *pl, int k)
+{
+    int i;
+    if (k < pl->lenght && k >= 0)
+    {
+        for (i = k; i < pl->lenght - 1; i++)
+            pl->Table[i] = pl->Table[i + 1];
+        pl->lenght--;
+    }
+    else
+        printf("Empty List ....!\n");
+}
+
 Student readEtudiant()
 {
     Student e;
@@ -75,18 +113,67 @@ Student readEtudiant()
     return e;
 }
 
+void menu()
+{
+    char c;
+    fflush(stdin);
+    printf("-----------Menu-----------\n");
+    printf("insert debut --------- d\n");
+    printf("Insert end ----------- f\n");
+    printf("insert position k ---- k\n");
+    printf("Delete debut --------- D\n");
+    printf("Delete end ----------- F\n");
+    printf("Delete position k ---- K\n");
+    printf("Print List ----------- p\n");
+    printf("Quiter --------------- q\n");
+    printf("--------------------------\n");
+}
+
 int main()
 {
     Student e;
     List_E l;
     l.lenght = 0;
-    e = readEtudiant();
-    insert(&l, e, 0);
-    e = readEtudiant();
-    insert(&l, e, 1);
-    e = readEtudiant();
-    insert(&l, e, 1);
-    printf("In function main \n");
-    print_list(l);
+    char c = 'd';
+    int k;
+    while (c != 'q')
+    {
+        printf("Votre choix (h for help): ");
+        scanf("%c", &c);
+        switch (c)
+        {
+        case 'd':
+            e = readEtudiant();
+            insert_Start(&l, e);
+            break;
+        case 'f':
+            e = readEtudiant();
+            insert_End(&l, e);
+            break;
+        case 'k':
+            e = readEtudiant();
+            printf("Donnez k: ");
+            scanf("%d", &k);
+            insert(&l, e, k);
+            break;
+        case 'D':
+            delete_Start(&l);
+            break;
+        case 'F':
+            delete_End(&l);
+            break;
+        case 'K':
+            printf("Donnez k: ");
+            delete (&l, k);
+            break;
+        case 'p':
+            print_list(l);
+            break;
+        default:
+            menu();
+        }
+
+        fflush(stdin);
+    }
     return 0;
 }

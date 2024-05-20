@@ -59,6 +59,34 @@ void print_list(Student *p)
         i++;
     }
 }
+int get_size(Student *d)
+{
+    int k = 0;
+    while (d != NULL)
+    {
+        k++;
+        d = d->next;
+    }
+    return k;
+}
+
+void insert(Student **pdebut, Student *e, int k)
+{
+    int l = get_size(*pdebut);
+    if (k >= l || k <= 0)
+    {
+        printf("Position out of List!!!");
+    }
+    int i = 1;
+    Student *p = *pdebut;
+    while (i < k)
+    {
+        p = p->next;
+        i++;
+    }
+    e->next = p->next;
+    p->next = e;
+}
 
 int main()
 {
@@ -70,7 +98,12 @@ int main()
     insert_End(&debut, e);
     e = readEtudiant();
     insert_End(&debut, e);
+    int l = get_size(debut);
+    printf("List Size: %d\n", l);
+    print_list(debut);
 
+    e = readEtudiant();
+    insert(&debut, e, 2);
     print_list(debut);
     return 0;
 }
